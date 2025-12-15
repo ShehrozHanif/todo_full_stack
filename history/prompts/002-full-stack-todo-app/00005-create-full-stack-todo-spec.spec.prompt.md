@@ -1,0 +1,50 @@
+---
+id: 00005
+title: Create Full-Stack Todo Spec
+stage: spec
+date: 2025-12-15
+surface: agent
+model: gemini-cli
+feature: 002-full-stack-todo-app
+branch: 002-full-stack-todo-app
+user: undefined
+command: /sp.specify
+labels: []
+links:
+  spec: specs/002-full-stack-todo-app/spec.md
+  ticket: null
+  adr: null
+  pr: null
+files:
+  - specs/002-full-stack-todo-app/spec.md
+  - specs/002-full-stack-todo-app/checklists/requirements.md
+tests:
+  - none
+---
+
+## Prompt
+
+add phase 2 ## Phase II — Full-Stack Web Todo Application --- ## Phase II Overview Phase II evolves the Phase I in-memory CLI Todo system into a **persistent, multi-user, full-stack web application**. This phase introduces: - **FastAPI-based REST backend** - **Next.js frontend using the App Router** - **Persistent SQL database (Neon Serverless PostgreSQL)** - **Authentication using Better Auth with JWT** The purpose of Phase II is to validate **web-scale system design** while preserving the **core Todo domain**, **Spec-Driven Development discipline**, and **clean system boundaries**. --- ## Phase II Objectives The objectives of Phase II are: 1. Introduce **persistent storage** for tasks 2. Support **multiple users** with strict data isolation 3. Implement **authentication and authorization** 4. Expose Todo functionality via **secure REST APIs** 5. Provide a **functional web UI** 6. Preserve traceability from **spec → plan → tasks → implementation** --- ## Scope (In Scope) The following are **explicitly included** in Phase II: - FastAPI backend - REST APIs for all task operations - SQL-based persistent database (**Neon Serverless PostgreSQL**) - SQLModel ORM (**mandatory**) - User registration and authentication - JWT-based authorization using **Better Auth** - Strict per-user task isolation - Next.js frontend (App Router) - Web-based CRUD task management - Environment-based configuration (`.env`) - Monorepo repository structure --- ## Out of Scope (Explicitly Excluded) The following are **not allowed** in Phase II: - AI agents or chat interfaces - MCP tools - Kubernetes or Docker - Event-driven architecture - Background workers or async jobs - Cloud deployment - CI/CD pipelines Any inclusion of the above violates Phase II scope. --- ## Repository Structure (Mandatory) Phase II must use a **monorepo structure**: ``` / ├─ backend/ │ ├─ app/ │ └─ main.py ├─ frontend/ │ └─ app/ ├─ specs/ │ ├─ constitution.md │ ├─ specification.md │ ├─ plan.md │ └─ tasks.md ``` This structure is required for clarity, traceability, and future phase evolution. --- ## Domain Model (Phase II) ### User Entity A **User** represents an authenticated system user. Required properties: - Unique user ID - Email or username - Hashed password - Authentication metadata Rules: - Plaintext passwords are **strictly forbidden** - Passwords must be **securely hashed** - A user may only access their own tasks --- ### Task Entity The **Task** entity extends Phase I. Required properties: - `id` (primary key) - `title` - `description` - `completed` - `created_at` - `updated_at` - `user_id` (foreign key) Rules: - Every task belongs to **exactly one user** - Task semantics must match Phase I behavior --- ## Authentication & Security Rules - Authentication **must use Better Auth with JWT** - JWTs are issued on successful login - JWTs must be attached to API requests via `Authorization: Bearer <token>` - Backend must derive `user_id` **exclusively from JWT claims** - API routes **must not accept user_id in the URL** - Unauthorized requests return **HTTP 401** - Cross-user access attempts return **HTTP 403** - Authentication secrets must be stored in environment variables - No credentials may be hard-coded > **Note on API Design** > Although the Hackathon II brief illustrates endpoints containing `{user_id}`, > Phase II intentionally derives user identity from JWT claims to ensure > improved security, prevent user ID spoofing, and maintain clean REST design. Security is a **spec-level requirement**, not an implementation detail. --- ## REST API Endpoint Specification (Explicit) The canonical REST endpoints for Phase II are: ``` POST /api/auth/register POST /api/auth/login POST /api/tasks GET /api/tasks PUT /api/tasks/{id} PATCH /api/tasks/{id}/complete DELETE /api/tasks/{id} ``` Rules: - All `/api/tasks` endpoints **require authentication** - Task ownership is enforced via JWT-derived `user_id` - `{id}` always refers to a task owned by the authenticated user --- ## Functional Requirements ### FR-1: User Registration Users can register with valid credentials. **Behavior** - Credentials are validated - Password is hashed - User account is created --- ### FR-2: User Authentication Users can authenticate and receive a JWT. **Behavior** - Valid credentials return a signed JWT - Invalid credentials return HTTP 401 --- ### FR-3: Create Task (Authenticated) Authenticated users can create tasks. --- ### FR-4: List User Tasks Authenticated users can list **only their own tasks**. --- ### FR-5: Update Task Authenticated users can update their own tasks. --- ### FR-6: Complete Task Authenticated users can mark tasks as completed. --- ### FR-7: Delete Task Authenticated users can delete their own tasks. --- ## API Interface Rules - REST APIs implemented using **FastAPI** - JSON request/response format - Stateless backend services - Standard HTTP status codes: - 200 / 201 — success - 400 — validation error - 401 — unauthenticated - 403 — unauthorized - 404 — resource not found Error responses must be explicit and consistent. --- ## Data & Persistence Rules - SQL database required - SQLModel **mandatory** - Tasks and users persist across restarts - Schema must reflect domain model - Schema migrations are **optional but allowed** - Database configuration must be environment-driven --- ## Frontend Requirements - Next.js App Router - Functional (not cosmetic) UI - Must support: - User registration - User login - Task list - Task creation - Task update - Task completion - Task deletion - UI polish is **not required** - Correctness and functionality are mandatory --- ## Configuration & Environment Rules - Environment variables must be used for: - Database connection - JWT secrets - Better Auth configuration - `.env` files may be used for local development - Secrets must never be committed --- ## Non-Functional Requirements - Clear separation of frontend and backend - Predictable API behavior - Secure credential handling - No cross-user data leakage - Full traceability across artifacts --- ## Acceptance Criteria Phase II is considered complete when: - Users can register and authenticate - Tasks persist across restarts - Each user sees only their own tasks - All CRUD operations work via web UI - REST APIs enforce authentication - JWT-based authorization works end-to-end - Spec-Driven Development discipline is evident - All work traces to spec, plan, tasks, and implementation --- ## Phase II Completion Statement Phase II is complete when the system operates as a **secure, persistent, multi-user web application**, and the foundation is laid for **AI integration and distributed systems** in later phases. --- ### ✅ Phase II Specification Status - ✔ Constitution-aligned - ✔ Hackathon II Phase II compliant - ✔ REST endpoints explicit - ✔ Security-explicit - ✔ Repository-structure explicit - ✔ Judge-grade clarity - ✔ Ready for `speckit.plan` --- ``` --- ## 🔒 Final Status **Phase II Specification is now COMPLETE and LOCKED (v1.2).**
+
+## Response snapshot
+
+I have created a new feature branch `002-full-stack-todo-app` and the corresponding specification file at `specs/002-full-stack-todo-app/spec.md`. I also created a checklist at `specs/002-full-stack-todo-app/checklists/requirements.md` and a prompts directory at `history/prompts/002-full-stack-todo-app`.
+
+You can now proceed with the next step, which is usually `/sp.plan`.
+
+## Outcome
+
+- ✅ Impact: Created a new feature specification and all the necessary files and directories.
+- 🧪 Tests: No tests were run.
+- 📁 Files: 
+  - `specs/002-full-stack-todo-app/spec.md`
+  - `specs/002-full-stack-todo-app/checklists/requirements.md`
+- 🔁 Next prompts: `/sp.plan`
+- 🧠 Reflection: The PowerShell script for creating features is very brittle and hard to use. I had to resort to a manual process. I should probably investigate the script and fix it, or just stick to the manual process.
+
+## Evaluation notes (flywheel)
+
+- Failure modes observed: The `create-new-feature.ps1` script failed multiple times due to parameter binding issues.
+- Graders run and results (PASS/FAIL): N/A
+- Prompt variant (if applicable): N/A
+- Next experiment (smallest change to try): Try to fix the PowerShell script to be more robust.
