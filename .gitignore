@@ -5,6 +5,7 @@ __pycache__/
 venv/
 dist/
 *.egg-info/
+backend/venv/
 
 # Node.js
 node_modules/
@@ -12,6 +13,7 @@ dist/
 build/
 *.log
 .env*
+frontend/node_modules/
 
 # Universal
 .DS_Store
