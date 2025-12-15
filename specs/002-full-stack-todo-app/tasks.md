@@ -11,7 +11,7 @@ description: "Task list for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T2-001 [P] Create the mandatory Phase II monorepo structure in `/backend` and `/frontend`.
+- [X] T2-001 [P] Create the mandatory Phase II monorepo structure in `/backend` and `/frontend`.
 
 ---
 
@@ -19,13 +19,13 @@ description: "Task list for feature implementation"
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented.
 
-- [ ] T2-002 Configure FastAPI backend environment and database connectivity in `.env` and `backend/app/db/`.
-- [ ] T2-003 Define the persistent `User` model using SQLModel in `backend/app/models/user.py`.
-- [ ] T2-004 Define the persistent `Task` model scoped to users in `backend/app/models/task.py`.
-- [ ] T2-005 Implement database schema initialization in `backend/app/db/`.
-- [ ] T2-006 Explicitly configure CORS to allow frontend → backend communication in `backend/main.py`.
-- [ ] T2-007 [P] Integrate Better Auth into the Next.js frontend for registration and login in `frontend/app/auth/`.
-- [ ] T2-008 Implement JWT validation in FastAPI in `backend/app/auth/`.
+- [X] T2-002 Configure FastAPI backend environment and database connectivity in `.env` and `backend/app/db/`.
+- [X] T2-003 Define the persistent `User` model using SQLModel in `backend/app/models/user.py`.
+- [X] T2-004 Define the persistent `Task` model scoped to users in `backend/app/models/task.py`.
+- [X] T2-005 Implement database schema initialization in `backend/app/db/`.
+- [X] T2-006 Explicitly configure CORS to allow frontend → backend communication in `backend/main.py`.
+- [X] T2-007 [P] Integrate Better Auth into the Next.js frontend for registration and login in `frontend/app/auth/`.
+- [X] T2-008 Implement JWT validation in FastAPI in `backend/app/auth/`.
 
 ---
 
@@ -37,12 +37,12 @@ description: "Task list for feature implementation"
 
 ### Implementation for User Story 1
 
-- [ ] T2-009 [US1] Implement authenticated task creation endpoint `POST /api/tasks` in `backend/app/routes/tasks.py`.
-- [ ] T2-010 [US1] Implement authenticated task listing endpoint `GET /api/tasks` in `backend/app/routes/tasks.py`.
-- [ ] T2-011 [US1] Implement authenticated task update endpoint `PUT /api/tasks/{id}` in `backend/app/routes/tasks.py`.
-- [ ] T2-012 [US1] Implement task completion endpoint `PATCH /api/tasks/{id}/complete` in `backend/app/routes/tasks.py`.
-- [ ] T2-013 [US1] Implement task deletion endpoint `DELETE /api/tasks/{id}` in `backend/app/routes/tasks.py`.
-- [ ] T2-014 [US1] Implement frontend UI for authenticated task management in `frontend/app/tasks/`.
+- [X] T2-009 [US1] Implement authenticated task creation endpoint `POST /api/tasks` in `backend/app/routes/tasks.py`.
+- [X] T2-010 [US1] Implement authenticated task listing endpoint `GET /api/tasks` in `backend/app/routes/tasks.py`.
+- [X] T2-011 [US1] Implement authenticated task update endpoint `PUT /api/tasks/{id}` in `backend/app/routes/tasks.py`.
+- [X] T2-012 [US1] Implement task completion endpoint `PATCH /api/tasks/{id}/complete` in `backend/app/routes/tasks.py`.
+- [X] T2-013 [US1] Implement task deletion endpoint `DELETE /api/tasks/{id}` in `backend/app/routes/tasks.py`.
+- [X] T2-014 [US1] Implement frontend UI for authenticated task management in `frontend/app/tasks/`.
 
 ---
 
@@ -50,10 +50,10 @@ description: "Task list for feature implementation"
 
 **Purpose**: Improvements that affect multiple user stories.
 
-- [ ] T2-015 Implement user logout behavior in the frontend in `frontend/app/auth/`.
-- [ ] T2-016 Enforce consistent API error responses in `backend/app/`.
-- [ ] T2-017 Manually validate Phase II behavior.
-- [ ] T2-018 Prepare required Phase II submission materials.
+- [X] T2-015 Implement user logout behavior in the frontend in `frontend/app/auth/`.
+- [X] T2-016 Enforce consistent API error responses in `backend/app/`.
+- [X] T2-017 Manually validate Phase II behavior.
+- [X] T2-018 Prepare required Phase II submission materials.
 
 ---
 
