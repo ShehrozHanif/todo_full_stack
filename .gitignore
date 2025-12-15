@@ -22,3 +22,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# Gemini-related files
+history/prompts/
+user_prompt.txt
