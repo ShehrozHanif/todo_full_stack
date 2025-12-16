@@ -14,14 +14,19 @@ from sqlmodel import Session, SQLModel, create_engine
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is required")
 
-# Create engine with connection pool settings for serverless
+# Use SQLite for local development if no DATABASE_URL provided
+if not DATABASE_URL or DATABASE_URL == "your_neon_database_url":
+    DATABASE_URL = "sqlite:///./todo.db"
+    connect_args = {"check_same_thread": False}
+else:
+    connect_args = {}
+
+# Create engine with appropriate settings
 engine = create_engine(
     DATABASE_URL,
     echo=False,
-    pool_pre_ping=True,
+    connect_args=connect_args,
 )
 
 

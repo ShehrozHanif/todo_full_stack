@@ -12,104 +12,126 @@ Constitution -> Specification -> Plan -> Tasks -> Implementation
 
 All code is generated via **Claude Code** based on approved specifications. No manual coding is permitted.
 
-## Current Phase: Phase I — In-Memory CLI Todo Application
+## Current Phase: Phase II — Full-Stack Web Todo Application
 
-Phase I establishes the **foundational Todo domain** using a pure Python, in-memory CLI application.
+Phase II evolves the system into a **persistent, multi-user, full-stack web application** with:
+- FastAPI REST backend with JWT authentication
+- Next.js frontend (App Router)
+- SQLite database (local) / PostgreSQL (production)
+- User registration, login, and data isolation
 
-### Features
+## Quick Start
 
-- Create, list, update, complete, and delete tasks
-- Sequential task IDs starting from 1
-- Timestamps for creation and updates
-- In-memory storage (all data lost on exit)
-- Menu-based CLI interaction
+### Prerequisites
 
-### Constraints
+- Python 3.9+
+- Node.js 16+
+- pip and npm
 
-- **No persistence** — all tasks exist only in memory
-- **No external dependencies** — pure Python standard library
-- **No frameworks** — simple, readable code
-
-## Requirements
-
-- **Python 3.13+**
-- No additional packages required
-
-## Recommended Tool
-
-**UV** is the recommended Python environment and package manager for this project.
+### Backend Setup
 
 ```bash
-# Install UV (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Or on Windows
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
 
-## Running the Application
+Backend runs at: http://localhost:8000
 
-### Using Python directly
+### Frontend Setup
 
 ```bash
-python src/main.py
+cd frontend
+npm install
+npm run dev
 ```
 
-### Using UV
+Frontend runs at: http://localhost:3000
 
-```bash
-uv run src/main.py
-```
+## Features
 
-## Usage
+### Authentication
+- User registration with email/username/password
+- JWT-based authentication
+- Secure password hashing with bcrypt
 
-The application presents a menu-based interface:
+### Task Management
+- Create, read, update, delete tasks
+- Mark tasks as complete
+- Per-user data isolation
+- Persistent storage
 
-```
-========================================
-        TODO CLI APPLICATION
-========================================
+### API Endpoints
 
-  1. Add Task
-  2. List Tasks
-  3. Update Task
-  4. Complete Task
-  5. Delete Task
-  6. Exit
-
-========================================
-```
-
-### Demo Flow
-
-1. Start the application
-2. Add multiple tasks (option 1)
-3. List tasks to verify ordering (option 2)
-4. Update a task (option 3)
-5. Complete a task (option 4)
-6. Delete a task (option 5)
-7. Exit the application (option 6)
-8. Restart to confirm all tasks are cleared
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/auth/register | Register new user |
+| POST | /api/auth/login | Login and get JWT |
+| GET | /api/auth/me | Get current user |
+| POST | /api/tasks/ | Create task |
+| GET | /api/tasks/ | List user's tasks |
+| PUT | /api/tasks/{id} | Update task |
+| PATCH | /api/tasks/{id}/complete | Mark complete |
+| DELETE | /api/tasks/{id} | Delete task |
 
 ## Project Structure
 
 ```
 todo_full_stack/
-├── .specify/                    # Spec-Kit Plus configuration
-│   ├── memory/
-│   │   └── constitution.md      # Project constitution
-│   └── templates/               # Specification templates
+├── backend/
+│   ├── app/
+│   │   ├── auth/           # Authentication module
+│   │   ├── db/             # Database configuration
+│   │   ├── models/         # SQLModel entities
+│   │   └── routes/         # API routes
+│   ├── main.py             # FastAPI application
+│   └── requirements.txt
+├── frontend/
+│   ├── app/
+│   │   ├── context/        # React context (Auth)
+│   │   ├── lib/            # API client
+│   │   ├── login/          # Login page
+│   │   ├── register/       # Registration page
+│   │   └── tasks/          # Tasks page
+│   └── package.json
 ├── specs/
-│   └── 001-in-memory-cli-todo/  # Phase I specifications
-│       ├── spec.md              # Feature specification
-│       ├── plan.md              # Implementation plan
-│       ├── tasks.md             # Task breakdown
-│       └── implement.md         # Execution log
+│   ├── 001-in-memory-cli-todo/   # Phase I specs
+│   └── 002-full-stack-todo-app/  # Phase II specs
 ├── src/
-│   └── main.py                  # Phase I implementation
-├── CLAUDE.md                    # Claude Code instructions
-└── README.md                    # This file
+│   └── main.py             # Phase I CLI (preserved)
+├── CLAUDE.md               # Claude Code instructions
+└── README.md
 ```
+
+## Validation Results
+
+All Phase II requirements have been validated:
+
+- [x] User registration works
+- [x] User login returns JWT
+- [x] Tasks persist across restarts
+- [x] User isolation enforced (users only see own tasks)
+- [x] Unauthorized access returns 401
+- [x] Cross-user access returns 403
+- [x] All CRUD operations work
+- [x] Frontend connects to backend
+
+## Technology Stack
+
+### Backend
+- FastAPI 0.109
+- SQLModel 0.0.14
+- bcrypt for password hashing
+- python-jose for JWT
+
+### Frontend
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+
+### Database
+- SQLite (local development)
+- PostgreSQL (production via Neon)
 
 ## Spec-Driven Development
 
@@ -125,8 +147,8 @@ This project strictly follows Spec-Driven Development principles:
 
 | Phase | Description | Status |
 |-------|-------------|--------|
-| I | In-Memory CLI Todo App | In Progress |
-| II | Full-Stack Web Application | Planned |
+| I | In-Memory CLI Todo App | Complete |
+| II | Full-Stack Web Application | Complete |
 | III | AI-Powered Todo Chatbot | Planned |
 | IV | Local Kubernetes Deployment | Planned |
 | V | Cloud-Native Event-Driven System | Planned |

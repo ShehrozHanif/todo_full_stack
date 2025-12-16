@@ -5,6 +5,7 @@ __pycache__/
 venv/
 dist/
 *.egg-info/
+backend/venv/
 
 # Node.js
 node_modules/
@@ -12,6 +13,8 @@ dist/
 build/
 *.log
 .env*
+frontend/node_modules/
+frontend/.next/
 
 # Universal
 .DS_Store
@@ -20,3 +23,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# Gemini-related files
+history/prompts/
+user_prompt.txt
