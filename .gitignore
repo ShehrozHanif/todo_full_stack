@@ -14,6 +14,7 @@ build/
 *.log
 .env*
 frontend/node_modules/
+frontend/.next/
 
 # Universal
 .DS_Store
